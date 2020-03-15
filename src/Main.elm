@@ -1,8 +1,8 @@
 module Main exposing (main)
 
 import Browser
-import Html exposing (Html, div, input, text)
-import Html.Attributes exposing (placeholder)
+import Html exposing (Html, div, img, input, text)
+import Html.Attributes exposing (class, placeholder, src, style)
 import Html.Events exposing (onInput)
 import Random
 import Random.List
@@ -55,7 +55,12 @@ update msg model =
 
 renderPlayer : Int -> Html Msg
 renderPlayer number =
-    div [] [ text ("Random number: " ++ String.fromInt number) ]
+    let
+        backgroundPosition : String
+        backgroundPosition =
+            "-" ++ String.fromInt (number * 1000) ++ "px 0"
+    in
+    div [ class "card", style "background-position" backgroundPosition ] []
 
 
 renderPlayers : String -> List (Html Msg)
