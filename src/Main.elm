@@ -2,17 +2,10 @@ module Main exposing (main)
 
 import Browser
 import Html exposing (Html, div, img, input, text)
-import Html.Attributes exposing (class, placeholder, src, style)
+import Html.Attributes exposing (class, placeholder, src)
 import Html.Events exposing (onInput)
 import Random
 import Random.List
-
-
-exclusiveNumbersGenerator : Int -> Int -> Random.Generator (List Int)
-exclusiveNumbersGenerator min max =
-    Random.map
-        (List.take 4)
-        (Random.List.shuffle (List.range min max))
 
 
 seedFromInput : String -> Random.Seed
@@ -53,15 +46,17 @@ update msg model =
             { model | seedInput = SeedValue str }
 
 
-renderPlayer : Int -> Html Msg
-renderPlayer number =
+renderPlayer : Int -> Int -> Int -> Html Msg
+renderPlayer first second index =
     let
-        imageUrl : String
-        imageUrl =
+        imageUrl : Int -> String
+        imageUrl number =
             "/assets/cards/" ++ String.fromInt number ++ ".jpg"
     in
     div []
-        [ img [ class "card", src imageUrl ] []
+        [ div [] [ text ("Player " ++ String.fromInt index) ]
+        , img [ class "card", src (imageUrl first) ] []
+        , img [ class "card", src (imageUrl second) ] []
         ]
 
 
@@ -72,15 +67,16 @@ renderPlayers seedValue =
         numbers =
             seedValue
                 |> seedFromInput
-                |> Random.step (exclusiveNumbersGenerator 1 10)
+                |> Random.step (Random.List.shuffle (List.range 1 54))
                 |> Tuple.first
+                |> List.take 8
     in
     case numbers of
-        [ first, second, third, fourth ] ->
-            [ renderPlayer first
-            , renderPlayer second
-            , renderPlayer third
-            , renderPlayer fourth
+        [ first, second, third, fourth, fifth, sixth, seventh, eigth ] ->
+            [ renderPlayer first second 1
+            , renderPlayer third fourth 2
+            , renderPlayer fifth sixth 3
+            , renderPlayer seventh eigth 4
             ]
 
         _ ->
