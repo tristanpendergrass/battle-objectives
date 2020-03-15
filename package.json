@@ -9,5 +9,13 @@
   "scripts": {
     "start": "parcel src/index.html",
     "build": "parcel build src/index.html --out-dir docs --public-url https://www.tristanpendergrass.com/battle-objectives/"
+  },
+  "staticFiles": {
+    "staticPath": [
+      {
+        "staticPath": "static",
+        "staticOutDir": "assets"
+      }
+    ]
   }
 }

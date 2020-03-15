@@ -1,6 +1,27 @@
+// constantjs to do with spritesheet.png
+// $spritesheet-height: 874px;
+// $spritesheet-width: 31968px;
+// $spritesheet-count: 54;
+
+// derived values
+// $spritesheet-card-width: $spritesheet-width / $spritesheet-count;
+
+$source-width: 592px;
+$source-height: 874px;
+
 .card {
-  height: 300px;
-  width: 150px;
-  background-image: url("../static/spritesheet.png");
-  background-size: 25000px 300px;
+  $height: 300px;
+  $width: $height * $source-width / $source-height;
+
+  height: $height;
+  width: $width;
+
+  // $card-height: 200px;
+  // $card-width: $card-height * ($spritesheet-card-width / $spritesheet-height);
+
+  // height: $card-height;
+  // width: $card-width;
+  // background-image: url("../static/spritesheet.png");
+  // background-size: ($card-height * ($spritesheet-width / $spritesheet-height))
+  //   $card-height;
 }

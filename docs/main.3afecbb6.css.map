@@ -1,1 +1,0 @@
-{"version":3,"sources":["main.scss"],"names":[],"mappings":"AAAA,MACE,YAAA,CACA,WAAA,CACA,+GAAA,CACA","file":"main.3afecbb6.css","sourceRoot":"..\\src","sourcesContent":[".card {\r\n  height: 300px;\r\n  width: 150px;\r\n  background-image: url(\"../static/spritesheet.png\");\r\n  background-size: 25000px 300px;\r\n}\r\n"]}

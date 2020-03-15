@@ -56,11 +56,13 @@ update msg model =
 renderPlayer : Int -> Html Msg
 renderPlayer number =
     let
-        backgroundPosition : String
-        backgroundPosition =
-            "-" ++ String.fromInt (number * 1000) ++ "px 0"
+        imageUrl : String
+        imageUrl =
+            "/assets/cards/" ++ String.fromInt number ++ ".jpg"
     in
-    div [ class "card", style "background-position" backgroundPosition ] []
+    div []
+        [ img [ class "card", src imageUrl ] []
+        ]
 
 
 renderPlayers : String -> List (Html Msg)
