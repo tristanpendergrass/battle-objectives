@@ -51,7 +51,7 @@ renderPlayer first second index =
     let
         imageUrl : Int -> String
         imageUrl number =
-            "/assets/cards/" ++ String.fromInt number ++ ".jpg"
+            "/" ++ String.fromInt number ++ ".jpg"
     in
     div []
         [ div [] [ text ("Player " ++ String.fromInt index) ]
@@ -87,7 +87,7 @@ renderPlayersContainer : SeedInput -> Html Msg
 renderPlayersContainer seedInput =
     case seedInput of
         Empty ->
-            div [] [ text "Empty seed" ]
+            div [] []
 
         SeedValue seedValue ->
             div [] (renderPlayers seedValue)
