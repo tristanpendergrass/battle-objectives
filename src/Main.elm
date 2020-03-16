@@ -46,6 +46,16 @@ update msg model =
             { model | seedInput = SeedValue str }
 
 
+renderCard : String -> Html Msg
+renderCard imageUrl =
+    div [ class "flip-card" ]
+        [ div [ class "flip-card-inner" ]
+            [ div [ class "flip-card-back" ] [ img [ class "card", src imageUrl ] [] ]
+            , div [ class "flip-card-front" ] [ img [ class "card", src "battle-goal-back.jpg" ] [] ]
+            ]
+        ]
+
+
 renderPlayer : Int -> Int -> Int -> Html Msg
 renderPlayer first second index =
     let
@@ -55,8 +65,8 @@ renderPlayer first second index =
     in
     div []
         [ div [] [ text ("Player " ++ String.fromInt index) ]
-        , img [ class "card", src (imageUrl first) ] []
-        , img [ class "card", src (imageUrl second) ] []
+        , renderCard (imageUrl first)
+        , renderCard (imageUrl second)
         ]
 
 
