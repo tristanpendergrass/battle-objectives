@@ -10,7 +10,7 @@ $ npm start
 # Deployment
 
 ```
-$ npm run deploy
+$ npm run build
 ```
 
 # Todos
