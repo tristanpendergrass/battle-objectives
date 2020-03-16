@@ -51,7 +51,7 @@ renderPlayer first second index =
     let
         imageUrl : Int -> String
         imageUrl number =
-            "/" ++ String.fromInt number ++ ".jpg"
+            String.fromInt number ++ ".jpg"
     in
     div []
         [ div [] [ text ("Player " ++ String.fromInt index) ]
