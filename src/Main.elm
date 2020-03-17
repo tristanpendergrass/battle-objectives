@@ -1,7 +1,7 @@
 module Main exposing (main)
 
 import Browser
-import Html exposing (Html, button, div, img, input, label, span, text)
+import Html exposing (Html, button, div, hr, img, input, label, span, text)
 import Html.Attributes exposing (class, for, id, placeholder, src, value)
 import Html.Events exposing (onClick, onInput)
 import Random
@@ -152,8 +152,8 @@ renderSeedInput model =
                 SeedValue seedValue ->
                     seedValue
     in
-    div []
-        [ label [ for "seed-input" ] [ text "Seed input" ]
+    div [ class "seed-input" ]
+        [ label [ for "seed-input" ] [ text "Seed Input" ]
         , input [ id "seed-input", onInput HandleSeedInput, placeholder "Enter seed", value seedInputValue ] [ text "" ]
         ]
 
@@ -162,6 +162,7 @@ view : Model -> Html Msg
 view model =
     div []
         [ renderSeedInput model
+        , hr [] []
         , renderPlayersContainer model
         ]
 

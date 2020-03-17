@@ -2,12 +2,27 @@
 $source-width: 592px;
 $source-height: 874px;
 
+body {
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+}
+
 .card {
   $height: 300px;
   $width: $height * $source-width / $source-height;
 
   height: $height;
   width: $width;
+}
+
+.seed-input {
+  label {
+    display: block;
+    font-size: 1.5em;
+  }
+  input {
+    font-size: 2em;
+  }
 }
 
 // Flip card effect -- credit to https://www.w3schools.com/howto/howto_css_flip_card.asp
