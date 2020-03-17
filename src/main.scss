@@ -2,24 +2,50 @@
 $source-width: 592px;
 $source-height: 874px;
 
+$dark: #000000;
+$dark-2: #323232;
+$light-1: #ff1e56;
+$light-2: #ffac41;
+
 body {
+  margin: 0;
   font-size: 12px;
   font-family: Arial, sans-serif;
+  background-color: #323232;
+  color: #ffac41;
 }
 
 h1 {
+  display: inline-block;
   font-size: 4em;
+  margin-top: 0;
 }
 
 p {
   font-size: 2em;
   margin: 0;
 }
+
 li {
   font-size: 1.5em;
 }
+
 input {
   font-family: monospace;
+  background-color: $dark-2;
+  color: $light-2;
+  border-style: ridge;
+  margin: 5px 0;
+}
+
+.top-section {
+  background-color: $dark;
+  padding: 18px;
+  border-bottom: 2px solid $light-1;
+}
+
+.main-section {
+  padding: 18px;
 }
 
 .card {

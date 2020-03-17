@@ -1,7 +1,7 @@
 module Main exposing (main)
 
 import Browser
-import Html exposing (Html, button, div, h1, hr, img, input, label, li, ol, p, span, text)
+import Html exposing (Html, button, div, h1, img, input, label, li, ol, p, span, text)
 import Html.Attributes exposing (class, for, id, placeholder, src, value)
 import Html.Events exposing (onClick, onInput)
 import Random
@@ -173,10 +173,11 @@ renderTopSection =
 view : Model -> Html Msg
 view model =
     div []
-        [ renderTopSection
-        , hr [] []
-        , renderSeedInput model
-        , renderPlayersContainer model
+        [ div [ class "top-section" ] [ renderTopSection ]
+        , div [ class "main-section" ]
+            [ renderSeedInput model
+            , renderPlayersContainer model
+            ]
         ]
 
 
