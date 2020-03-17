@@ -1,9 +1,9 @@
 module Main exposing (main)
 
 import Browser
-import Html exposing (Html, div, img, input, text)
+import Html exposing (Html, button, div, img, input, span, text)
 import Html.Attributes exposing (class, placeholder, src)
-import Html.Events exposing (onInput)
+import Html.Events exposing (onClick, onInput)
 import Random
 import Random.List
 
@@ -24,16 +24,29 @@ type SeedInput
 
 type alias Model =
     { seedInput : SeedInput
+    , showPlayer1Cards : Bool
+    , showPlayer2Cards : Bool
+    , showPlayer3Cards : Bool
+    , showPlayer4Cards : Bool
     }
 
 
 initialModel : Model
 initialModel =
-    { seedInput = Empty }
+    { seedInput = Empty
+    , showPlayer1Cards = False
+    , showPlayer2Cards = False
+    , showPlayer3Cards = False
+    , showPlayer4Cards = False
+    }
 
 
 type Msg
     = HandleSeedInput String
+    | ToggleShowPlayer1Cards
+    | ToggleShowPlayer2Cards
+    | ToggleShowPlayer3Cards
+    | ToggleShowPlayer4Cards
 
 
 update : Msg -> Model -> Model
@@ -44,6 +57,18 @@ update msg model =
 
         HandleSeedInput str ->
             { model | seedInput = SeedValue str }
+
+        ToggleShowPlayer1Cards ->
+            { model | showPlayer1Cards = not model.showPlayer1Cards }
+
+        ToggleShowPlayer2Cards ->
+            { model | showPlayer2Cards = not model.showPlayer2Cards }
+
+        ToggleShowPlayer3Cards ->
+            { model | showPlayer3Cards = not model.showPlayer3Cards }
+
+        ToggleShowPlayer4Cards ->
+            { model | showPlayer4Cards = not model.showPlayer4Cards }
 
 
 renderCard : String -> Html Msg
@@ -56,22 +81,34 @@ renderCard imageUrl =
         ]
 
 
-renderPlayer : Int -> Int -> Int -> Html Msg
-renderPlayer first second index =
+renderPlayer : Msg -> Bool -> Int -> Int -> Int -> Html Msg
+renderPlayer handleClick showCards first second index =
     let
         imageUrl : Int -> String
         imageUrl number =
             String.fromInt number ++ ".jpg"
     in
-    div []
-        [ div [] [ text ("Player " ++ String.fromInt index) ]
+    div
+        [ class
+            (if showCards then
+                "flip"
+
+             else
+                ""
+            )
+        ]
+        [ div
+            []
+            [ span [] [ text ("Player " ++ String.fromInt index) ]
+            , button [ onClick handleClick ] [ text "Toggle" ]
+            ]
         , renderCard (imageUrl first)
         , renderCard (imageUrl second)
         ]
 
 
-renderPlayers : String -> List (Html Msg)
-renderPlayers seedValue =
+renderPlayers : Model -> String -> List (Html Msg)
+renderPlayers model seedValue =
     let
         numbers : List Int
         numbers =
@@ -83,31 +120,31 @@ renderPlayers seedValue =
     in
     case numbers of
         [ first, second, third, fourth, fifth, sixth, seventh, eigth ] ->
-            [ renderPlayer first second 1
-            , renderPlayer third fourth 2
-            , renderPlayer fifth sixth 3
-            , renderPlayer seventh eigth 4
+            [ renderPlayer ToggleShowPlayer1Cards model.showPlayer1Cards first second 1
+            , renderPlayer ToggleShowPlayer2Cards model.showPlayer2Cards third fourth 2
+            , renderPlayer ToggleShowPlayer3Cards model.showPlayer3Cards fifth sixth 3
+            , renderPlayer ToggleShowPlayer4Cards model.showPlayer4Cards seventh eigth 4
             ]
 
         _ ->
             [ div [] [ text "Something went wrong." ] ]
 
 
-renderPlayersContainer : SeedInput -> Html Msg
-renderPlayersContainer seedInput =
-    case seedInput of
+renderPlayersContainer : Model -> Html Msg
+renderPlayersContainer model =
+    case model.seedInput of
         Empty ->
             div [] []
 
         SeedValue seedValue ->
-            div [] (renderPlayers seedValue)
+            div [] (renderPlayers model seedValue)
 
 
 view : Model -> Html Msg
 view model =
     div []
         [ input [ onInput HandleSeedInput, placeholder "Enter seed" ] [ text "" ]
-        , renderPlayersContainer model.seedInput
+        , renderPlayersContainer model
         ]
 
 
