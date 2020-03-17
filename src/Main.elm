@@ -1,8 +1,8 @@
 module Main exposing (main)
 
 import Browser
-import Html exposing (Html, button, div, img, input, span, text)
-import Html.Attributes exposing (class, placeholder, src)
+import Html exposing (Html, button, div, img, input, label, span, text)
+import Html.Attributes exposing (class, for, id, placeholder, src, value)
 import Html.Events exposing (onClick, onInput)
 import Random
 import Random.List
@@ -140,10 +140,28 @@ renderPlayersContainer model =
             div [] (renderPlayers model seedValue)
 
 
+renderSeedInput : Model -> Html Msg
+renderSeedInput model =
+    let
+        seedInputValue : String
+        seedInputValue =
+            case model.seedInput of
+                Empty ->
+                    ""
+
+                SeedValue seedValue ->
+                    seedValue
+    in
+    div []
+        [ label [ for "seed-input" ] [ text "Seed input" ]
+        , input [ id "seed-input", onInput HandleSeedInput, placeholder "Enter seed", value seedInputValue ] [ text "" ]
+        ]
+
+
 view : Model -> Html Msg
 view model =
     div []
-        [ input [ onInput HandleSeedInput, placeholder "Enter seed" ] [ text "" ]
+        [ renderSeedInput model
         , renderPlayersContainer model
         ]
 
