@@ -7,6 +7,21 @@ body {
   font-family: Arial, sans-serif;
 }
 
+h1 {
+  font-size: 4em;
+}
+
+p {
+  font-size: 2em;
+  margin: 0;
+}
+li {
+  font-size: 1.5em;
+}
+input {
+  font-family: monospace;
+}
+
 .card {
   $height: 300px;
   $width: $height * $source-width / $source-height;

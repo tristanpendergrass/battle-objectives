@@ -1,7 +1,7 @@
 module Main exposing (main)
 
 import Browser
-import Html exposing (Html, button, div, hr, img, input, label, span, text)
+import Html exposing (Html, button, div, h1, hr, img, input, label, li, ol, p, span, text)
 import Html.Attributes exposing (class, for, id, placeholder, src, value)
 import Html.Events exposing (onClick, onInput)
 import Random
@@ -158,11 +158,24 @@ renderSeedInput model =
         ]
 
 
+renderTopSection : Html Msg
+renderTopSection =
+    div []
+        [ h1 [] [ text "Gloomhaven Battle Goals Generator" ]
+        , p [] [ text "Steps for use:" ]
+        , ol []
+            [ li [] [ text "Decide with your group on any suitable seed (e.g. 'foobarbaz') and which player is which number." ]
+            , li [] [ text "Enter the seed in the box below and then click the 'Show' button for your number." ]
+            ]
+        ]
+
+
 view : Model -> Html Msg
 view model =
     div []
-        [ renderSeedInput model
+        [ renderTopSection
         , hr [] []
+        , renderSeedInput model
         , renderPlayersContainer model
         ]
 
