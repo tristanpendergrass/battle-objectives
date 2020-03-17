@@ -19,7 +19,8 @@ $ npm run build
 - Show card instead of number - DONE
 - Show two cards per player - DONE
 - Make card look nicer - DONE
-- Hide results until clicked - IN PROGRESS
+- Hide results until clicked - DONE
+- Prettify - IN PROGRESS
 - Work on mobile
 - Favicon
 - Get seed from query string
