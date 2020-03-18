@@ -21,6 +21,7 @@ $ npm run build
 - Make card look nicer - DONE
 - Hide results until clicked - DONE
 - Prettify - DONE
+- Add github mark to page - DONE
 - Work on mobile
 - Favicon
 - Get seed from query string

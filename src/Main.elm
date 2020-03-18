@@ -1,8 +1,8 @@
 module Main exposing (main)
 
 import Browser
-import Html exposing (Html, button, div, h1, h2, img, input, label, li, ol, p, span, text)
-import Html.Attributes exposing (class, for, id, placeholder, src, value)
+import Html exposing (Html, a, button, div, h1, img, input, label, li, ol, p, text)
+import Html.Attributes exposing (alt, class, for, href, id, placeholder, src, target, value)
 import Html.Events exposing (onClick, onInput)
 import Random
 import Random.List
@@ -193,6 +193,11 @@ view model =
         , div [ class "main-section" ]
             [ renderSeedInput model
             , renderPlayersContainer model
+            ]
+        , div [ class "source-link" ]
+            [ a [ href "https://github.com/tristanpendergrass/battle-objectives", target "_blank" ]
+                [ img [ alt "Github Mark", class "github-mark", src "GitHub-Mark-32px.png" ] []
+                ]
             ]
         ]
 
