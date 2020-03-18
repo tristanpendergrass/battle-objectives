@@ -22,9 +22,7 @@ $ npm run build
 [x] Hide results until clicked
 [x] Make pretty
 [x] Add github mark to page
-[] Work on mobile
-[] Favicon
+[x] Favicon
 [] Get seed from query string
 [] Date input for seed
 [] Toggle between classic and Satire's cards
-[] Let user check and uncheck cards, state saved locally (so they can remember which they're going for)
