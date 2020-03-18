@@ -178,9 +178,9 @@ renderTopSection : Html Msg
 renderTopSection =
     div []
         [ h1 [] [ text "Gloomhaven Battle Goals Generator" ]
-        , p [] [ text "Steps for use:" ]
+        , p [] [ text "How to use:" ]
         , ol []
-            [ li [] [ text "Decide with your group on any suitable seed (e.g. 'foobarbaz') and which player is which number." ]
+            [ li [] [ text "Decide with your group on any suitable seed (e.g. 'myseed1234') and which player is which number." ]
             , li [] [ text "Enter the seed in the box below and then click the 'Show' button for your number." ]
             ]
         ]
