@@ -51,6 +51,7 @@ input {
 .card {
   $height: 300px;
   $width: $height * $source-width / $source-height;
+  border-radius: 8px;
 
   height: $height;
   width: $width;
@@ -128,7 +129,6 @@ input {
   display: inline-block;
 
   border: 1px solid transparent;
-  border-radius: 8px;
   background-color: transparent;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
