@@ -15,16 +15,16 @@ $ npm run build
 
 # Todos
 
-- Host on github pages - DONE
-- Show card instead of number - DONE
-- Show two cards per player - DONE
-- Make card look nicer - DONE
-- Hide results until clicked - DONE
-- Prettify - DONE
-- Add github mark to page - DONE
-- Work on mobile
-- Favicon
-- Get seed from query string
-- Date input for seed
-- Toggle between classic and Satire's cards
-- Let user check and uncheck cards, state saved locally (so they can remember which they're going for)
+[x] Host on github pages
+[x] Show card instead of number
+[x] Show two cards per player
+[x] Make card look nicer
+[x] Hide results until clicked
+[x] Make pretty
+[x] Add github mark to page
+[] Work on mobile
+[] Favicon
+[] Get seed from query string
+[] Date input for seed
+[] Toggle between classic and Satire's cards
+[] Let user check and uncheck cards, state saved locally (so they can remember which they're going for)
