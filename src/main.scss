@@ -2,7 +2,7 @@
 $source-width: 592px;
 $source-height: 874px;
 
-$dark: #000000;
+$dark-1: #000000;
 $dark-2: #323232;
 $light-1: #ff1e56;
 $light-2: #ffac41;
@@ -39,7 +39,7 @@ input {
 }
 
 .top-section {
-  background-color: $dark;
+  background-color: $dark-1;
   padding: 18px;
   border-bottom: 2px solid $light-1;
 }
@@ -57,13 +57,63 @@ input {
 }
 
 .seed-input {
+  display: flex;
+  justify-content: left;
+  margin-bottom: 15px;
+
   label {
     display: block;
     font-size: 1.5em;
   }
   input {
     font-size: 2em;
+    padding: 0.3em;
   }
+}
+
+.players-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+
+  .player {
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    margin-right: 20px;
+  }
+}
+
+.toggle {
+  display: inline-block;
+  margin: 0 auto 10px auto;
+  width: 80px;
+  background-color: $light-1;
+  color: white;
+  border-style: ridge;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.player-title {
+  display: inline-block;
+  font-size: 2.5em;
+  color: $light-1;
+  text-align: center;
+  margin-bottom: 15px;
+  border: 1px solid $light-1;
+  padding: 5px;
+}
+
+.flip .toggle {
+  background-color: $light-2;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: space-around;
 }
 
 // Flip card effect -- credit to https://www.w3schools.com/howto/howto_css_flip_card.asp
@@ -75,6 +125,7 @@ input {
 
   height: $height;
   width: $width;
+  display: inline-block;
 
   border: 1px solid transparent;
   border-radius: 8px;

@@ -1,7 +1,7 @@
 module Main exposing (main)
 
 import Browser
-import Html exposing (Html, button, div, h1, img, input, label, li, ol, p, span, text)
+import Html exposing (Html, button, div, h1, h2, img, input, label, li, ol, p, span, text)
 import Html.Attributes exposing (class, for, id, placeholder, src, value)
 import Html.Events exposing (onClick, onInput)
 import Random
@@ -53,7 +53,13 @@ update : Msg -> Model -> Model
 update msg model =
     case msg of
         HandleSeedInput "" ->
-            { model | seedInput = Empty }
+            { model
+                | seedInput = Empty
+                , showPlayer1Cards = False
+                , showPlayer2Cards = False
+                , showPlayer3Cards = False
+                , showPlayer4Cards = False
+            }
 
         HandleSeedInput str ->
             { model | seedInput = SeedValue str }
@@ -89,7 +95,8 @@ renderPlayer handleClick showCards first second index =
             String.fromInt number ++ ".jpg"
     in
     div
-        [ class
+        [ class "player"
+        , class
             (if showCards then
                 "flip"
 
@@ -97,13 +104,20 @@ renderPlayer handleClick showCards first second index =
                 ""
             )
         ]
-        [ div
-            []
-            [ span [] [ text ("Player " ++ String.fromInt index) ]
-            , button [ onClick handleClick ] [ text "Toggle" ]
+        [ div [ class "player-title" ] [ text ("Player " ++ String.fromInt index) ]
+        , button [ class "toggle", onClick handleClick ]
+            [ text
+                (if showCards then
+                    "Hide"
+
+                 else
+                    "Show"
+                )
             ]
-        , renderCard (imageUrl first)
-        , renderCard (imageUrl second)
+        , div [ class "cards-container" ]
+            [ renderCard (imageUrl first)
+            , renderCard (imageUrl second)
+            ]
         ]
 
 
@@ -134,10 +148,10 @@ renderPlayersContainer : Model -> Html Msg
 renderPlayersContainer model =
     case model.seedInput of
         Empty ->
-            div [] []
+            div [ class "players-container" ] []
 
         SeedValue seedValue ->
-            div [] (renderPlayers model seedValue)
+            div [ class "players-container" ] (renderPlayers model seedValue)
 
 
 renderSeedInput : Model -> Html Msg
@@ -153,8 +167,10 @@ renderSeedInput model =
                     seedValue
     in
     div [ class "seed-input" ]
-        [ label [ for "seed-input" ] [ text "Seed Input" ]
-        , input [ id "seed-input", onInput HandleSeedInput, placeholder "Enter seed", value seedInputValue ] [ text "" ]
+        [ div []
+            [ label [ for "seed-input" ] [ text "Seed Input" ]
+            , input [ id "seed-input", onInput HandleSeedInput, placeholder "Enter seed", value seedInputValue ] [ text "" ]
+            ]
         ]
 
 
