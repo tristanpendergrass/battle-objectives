@@ -31,14 +31,16 @@ type alias Model =
     }
 
 
-initialModel : Model
-initialModel =
-    { seedInput = Empty
-    , showPlayer1Cards = False
-    , showPlayer2Cards = False
-    , showPlayer3Cards = False
-    , showPlayer4Cards = False
-    }
+init : () -> ( Model, Cmd Msg )
+init _ =
+    ( { seedInput = Empty
+      , showPlayer1Cards = False
+      , showPlayer2Cards = False
+      , showPlayer3Cards = False
+      , showPlayer4Cards = False
+      }
+    , Cmd.none
+    )
 
 
 type Msg
@@ -47,34 +49,54 @@ type Msg
     | ToggleShowPlayer2Cards
     | ToggleShowPlayer3Cards
     | ToggleShowPlayer4Cards
+    | FillRandomSeed
 
 
-update : Msg -> Model -> Model
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         HandleSeedInput "" ->
-            { model
+            ( { model
                 | seedInput = Empty
                 , showPlayer1Cards = False
                 , showPlayer2Cards = False
                 , showPlayer3Cards = False
                 , showPlayer4Cards = False
-            }
+              }
+            , Cmd.none
+            )
 
         HandleSeedInput str ->
-            { model | seedInput = SeedValue str }
+            ( { model | seedInput = SeedValue str }, Cmd.none )
 
         ToggleShowPlayer1Cards ->
-            { model | showPlayer1Cards = not model.showPlayer1Cards }
+            ( { model | showPlayer1Cards = not model.showPlayer1Cards }, Cmd.none )
 
         ToggleShowPlayer2Cards ->
-            { model | showPlayer2Cards = not model.showPlayer2Cards }
+            ( { model | showPlayer2Cards = not model.showPlayer2Cards }, Cmd.none )
 
         ToggleShowPlayer3Cards ->
-            { model | showPlayer3Cards = not model.showPlayer3Cards }
+            ( { model | showPlayer3Cards = not model.showPlayer3Cards }, Cmd.none )
 
         ToggleShowPlayer4Cards ->
-            { model | showPlayer4Cards = not model.showPlayer4Cards }
+            ( { model | showPlayer4Cards = not model.showPlayer4Cards }, Cmd.none )
+
+        FillRandomSeed ->
+            let
+                randomChar : Random.Generator Char
+                randomChar =
+                    Random.map (\num -> Char.fromCode num) (Random.int 97 122)
+
+                randomString : Random.Generator String
+                randomString =
+                    Random.map String.fromList (Random.list 10 randomChar)
+            in
+            ( model, Random.generate HandleSeedInput randomString )
+
+
+subscriptions : Model -> Sub Msg
+subscriptions _ =
+    Sub.none
 
 
 renderCard : String -> Html Msg
@@ -171,6 +193,7 @@ renderSeedInput model =
             [ label [ for "seed-input" ] [ text "Seed Input" ]
             , input [ id "seed-input", onInput HandleSeedInput, placeholder "Enter seed", value seedInputValue ] [ text "" ]
             ]
+        , div [] [ button [ onClick FillRandomSeed ] [ text "Generate Random Seed" ] ]
         ]
 
 
@@ -204,8 +227,4 @@ view model =
 
 main : Program () Model Msg
 main =
-    Browser.sandbox
-        { init = initialModel
-        , view = view
-        , update = update
-        }
+    Browser.element { init = init, update = update, view = view, subscriptions = subscriptions }
