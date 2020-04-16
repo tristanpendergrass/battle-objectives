@@ -44,6 +44,19 @@ input {
   border-bottom: 2px solid $light-1;
 }
 
+.summary {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+
+  a {
+    color: $light-1;
+
+    &:hover {
+      color: lighten($light-1, 10%);
+    }
+  }
+}
+
 .main-section {
   padding: 18px;
 }

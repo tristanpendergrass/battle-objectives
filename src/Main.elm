@@ -1,7 +1,7 @@
 module Main exposing (main)
 
 import Browser
-import Html exposing (Html, a, button, div, h1, img, input, label, li, ol, p, text)
+import Html exposing (Html, a, button, div, h1, img, input, label, li, ol, p, span, text)
 import Html.Attributes exposing (alt, class, for, href, id, placeholder, src, target, value)
 import Html.Events exposing (onClick, onInput)
 import Random
@@ -200,7 +200,12 @@ renderSeedInput model =
 renderTopSection : Html Msg
 renderTopSection =
     div []
-        [ h1 [] [ text "Gloomhaven Battle Goals Generator" ]
+        [ h1 [] [ text "Satire's Extended Battle Goals Generator" ]
+        , p [ class "summary" ]
+            [ span [] [ text "A web app to help your group coordinate the use of " ]
+            , a [ href "https://boardgamegeek.com/thread/2184131/satires-extended-battle-goals" ] [ text "Satire's Extended Battle Goals for Gloomhaven" ]
+            , span [] [ text "." ]
+            ]
         , p [] [ text "How to use:" ]
         , ol []
             [ li [] [ text "Decide with your group on any suitable seed (e.g. 'myseed1234') and which player is which number." ]

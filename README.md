@@ -23,6 +23,6 @@ $ npm run build
 - [x] Make pretty
 - [x] Add github mark to page
 - [x] Favicon
-- [] Add generate a seed button
-- [] Add link to Satire's original BGG post
+- [x] Add generate a seed button
+- [x] Add link to Satire's original BGG post
 - [] Get seed from query string
