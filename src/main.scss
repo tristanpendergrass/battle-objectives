@@ -38,6 +38,11 @@ input {
   margin: 5px 0;
 }
 
+.emphasize {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
 .top-section {
   background-color: $dark-1;
   padding: 18px;
