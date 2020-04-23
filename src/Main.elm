@@ -2,8 +2,8 @@ module Main exposing (main)
 
 import Browser
 import Html exposing (Html, a, button, div, h1, img, input, label, li, ol, p, span, text)
-import Html.Attributes exposing (alt, class, for, href, id, placeholder, src, target, value)
-import Html.Events exposing (onClick, onInput)
+import Html.Attributes exposing (alt, checked, class, for, href, id, name, placeholder, src, target, type_, value)
+import Html.Events exposing (onCheck, onClick, onInput)
 import Random
 import Random.List
 
@@ -22,8 +22,15 @@ type SeedInput
     | SeedValue String
 
 
+type Set
+    = OriginalSet
+    | SatireSet
+    | CombinedSet
+
+
 type alias Model =
     { seedInput : SeedInput
+    , setSelection : Set
     , showPlayer1Cards : Bool
     , showPlayer2Cards : Bool
     , showPlayer3Cards : Bool
@@ -34,6 +41,7 @@ type alias Model =
 init : () -> ( Model, Cmd Msg )
 init _ =
     ( { seedInput = Empty
+      , setSelection = CombinedSet
       , showPlayer1Cards = False
       , showPlayer2Cards = False
       , showPlayer3Cards = False
@@ -45,6 +53,7 @@ init _ =
 
 type Msg
     = HandleSeedInput String
+    | HandleSetSelection Set Bool
     | ToggleShowPlayer1Cards
     | ToggleShowPlayer2Cards
     | ToggleShowPlayer3Cards
@@ -58,6 +67,17 @@ update msg model =
         HandleSeedInput "" ->
             ( { model
                 | seedInput = Empty
+                , showPlayer1Cards = False
+                , showPlayer2Cards = False
+                , showPlayer3Cards = False
+                , showPlayer4Cards = False
+              }
+            , Cmd.none
+            )
+
+        HandleSetSelection set _ ->
+            ( { model
+                | setSelection = set
                 , showPlayer1Cards = False
                 , showPlayer2Cards = False
                 , showPlayer3Cards = False
@@ -146,11 +166,22 @@ renderPlayer handleClick showCards first second index =
 renderPlayers : Model -> String -> List (Html Msg)
 renderPlayers model seedValue =
     let
+        ( min, max ) =
+            case model.setSelection of
+                OriginalSet ->
+                    ( 55, 79 )
+
+                SatireSet ->
+                    ( 1, 54 )
+
+                CombinedSet ->
+                    ( 1, 79 )
+
         numbers : List Int
         numbers =
             seedValue
                 |> seedFromInput
-                |> Random.step (Random.List.shuffle (List.range 1 79))
+                |> Random.step (Random.List.shuffle (List.range min max))
                 |> Tuple.first
                 |> List.take 8
     in
@@ -197,6 +228,33 @@ renderSeedInput model =
         ]
 
 
+renderSetSelection : Model -> Html Msg
+renderSetSelection model =
+    let
+        radioButton : String -> String -> Set -> Html Msg
+        radioButton idString labelString set =
+            div [ class "radio-button-container" ]
+                [ input
+                    [ type_ "radio"
+                    , id idString
+                    , name "set-selection"
+                    , onCheck (HandleSetSelection set)
+                    , checked (model.setSelection == set)
+                    ]
+                    []
+                , label [ for idString ] [ text labelString ]
+                ]
+    in
+    div [ class "set-selection" ]
+        [ p [] [ text "Cards Used" ]
+        , div [ class "radio-button-group" ]
+            [ radioButton "option-original" "Original Only" OriginalSet
+            , radioButton "option-satire" "Satire Only" SatireSet
+            , radioButton "option-combined" "Combined" CombinedSet
+            ]
+        ]
+
+
 renderTopSection : Html Msg
 renderTopSection =
     div []
@@ -220,7 +278,8 @@ view model =
     div []
         [ div [ class "top-section" ] [ renderTopSection ]
         , div [ class "main-section" ]
-            [ renderSeedInput model
+            [ renderSetSelection model
+            , renderSeedInput model
             , renderPlayersContainer model
             ]
         , div [ class "source-link" ]

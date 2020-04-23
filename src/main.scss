@@ -7,9 +7,12 @@ $dark-2: #323232;
 $light-1: #ff1e56;
 $light-2: #ffac41;
 
+html {
+  font-size: 12px;
+}
+
 body {
   margin: 0;
-  font-size: 12px;
   font-family: Arial, sans-serif;
   background-color: #323232;
   color: #ffac41;
@@ -17,17 +20,17 @@ body {
 
 h1 {
   display: inline-block;
-  font-size: 4em;
+  font-size: 4rem;
   margin-top: 0;
 }
 
 p {
-  font-size: 2em;
+  font-size: 2rem;
   margin: 0;
 }
 
 li {
-  font-size: 1.5em;
+  font-size: 1.5rem;
 }
 
 input {
@@ -50,7 +53,7 @@ input {
 }
 
 .summary {
-  font-size: 1.5em;
+  font-size: 1.5rem;
   margin-bottom: 10px;
 
   a {
@@ -82,11 +85,11 @@ input {
 
   label {
     display: block;
-    font-size: 1.5em;
+    font-size: 1.5rem;
   }
   input {
-    font-size: 2em;
-    padding: 0.3em;
+    font-size: 2rem;
+    padding: 0.3rem;
   }
   button {
     margin-top: 36px;
@@ -122,7 +125,7 @@ input {
 
 .player-title {
   display: inline-block;
-  font-size: 2.5em;
+  font-size: 2.5rem;
   color: $light-1;
   text-align: center;
   margin-bottom: 15px;
@@ -164,6 +167,30 @@ input {
     color: white;
   }
 }
+
+.set-selection {
+  // display: flex;
+  p {
+    font-size: 1.5rem;
+  }
+}
+
+.radio-button-group {
+  display: flex;
+  align-items: center;
+}
+
+.radio-button-container {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+
+  label {
+    display: inline-block;
+    margin-left: 2px;
+  }
+}
+
 // Flip card effect -- credit to https://www.w3schools.com/howto/howto_css_flip_card.asp
 
 /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
