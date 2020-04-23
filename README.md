@@ -25,4 +25,6 @@ $ npm run build
 - [x] Favicon
 - [x] Add generate a seed button
 - [x] Add link to Satire's original BGG post
-- [] Get seed from query string
+- [x] Add original battle goals to pool
+- [ ] Add option for only original, only satire, or both
+- [ ] Get seed from query string

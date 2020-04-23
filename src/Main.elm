@@ -150,7 +150,7 @@ renderPlayers model seedValue =
         numbers =
             seedValue
                 |> seedFromInput
-                |> Random.step (Random.List.shuffle (List.range 1 54))
+                |> Random.step (Random.List.shuffle (List.range 1 79))
                 |> Tuple.first
                 |> List.take 8
     in
