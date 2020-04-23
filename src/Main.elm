@@ -233,7 +233,16 @@ renderSetSelection model =
     let
         radioButton : String -> String -> Set -> Html Msg
         radioButton idString labelString set =
-            div [ class "radio-button-container" ]
+            div
+                [ class "radio-button-container"
+                , class
+                    (if model.setSelection == set then
+                        "selected"
+
+                     else
+                        ""
+                    )
+                ]
                 [ input
                     [ type_ "radio"
                     , id idString

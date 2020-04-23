@@ -173,6 +173,7 @@ input {
   p {
     font-size: 1.5rem;
   }
+  margin-bottom: 10px;
 }
 
 .radio-button-group {
@@ -184,6 +185,11 @@ input {
   display: flex;
   align-items: center;
   margin-right: 10px;
+  font-size: 1.2em;
+
+  &.selected {
+    text-decoration: underline;
+  }
 
   label {
     display: inline-block;
