@@ -26,5 +26,5 @@ $ npm run build
 - [x] Add generate a seed button
 - [x] Add link to Satire's original BGG post
 - [x] Add original battle goals to pool
-- [ ] Add option for only original, only satire, or both
+- [x] Add option for only original, only satire, or both
 - [ ] Get seed from query string
