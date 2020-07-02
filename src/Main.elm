@@ -175,7 +175,7 @@ renderPlayers model seedValue =
                     ( 1, 54 )
 
                 CombinedSet ->
-                    ( 1, 79 )
+                    ( 1, 78 )
 
         numbers : List Int
         numbers =
